@@ -1,3 +1,5 @@
+import './screens/photo_screen.dart';
+
 import './screens/feed_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +8,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'FlutterGalleryApp',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Feed(),
+      home: FullScreenImage(
+          altDescription:
+              'Языком разработки Flutter-приложений является Dart, а не JavaScript. Dart компилируется в нативный код той платформы, для которой готовится сборка. В этом и есть залог производительного взаимодействия с платформой. Когда дело касается динамических UI-элементов, анимаций, переходов между экранами - всё должно работать предельно эффективно',
+          name: 'Kirill Adechenko',
+          userName: 'kaparray'), //Feed(),
     );
   }
 }

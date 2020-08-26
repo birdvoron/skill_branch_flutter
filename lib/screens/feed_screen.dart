@@ -1,39 +1,65 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/cupertino.dart';
 
-import '../res/res.dart';
-import '../widgets/widgets.dart';
+import 'package:FlutterGalleryApp/res/res.dart';
+import 'package:FlutterGalleryApp/widgets/widgets.dart';
+
+const String kFlutterDash =
+    'https://flutter.dev/assets/404/dash_nest-c64796b59b65042a2b40fae5764c13b7477a592db79eaf04c86298dcb75b78ea.png';
 
 class Feed extends StatefulWidget {
-  Feed({Key key}) : super(key: key);
+  Feed({Key key, this.title}) : super(key: key);
+  final String title;
   @override
-  State<StatefulWidget> createState() {
-    return _FeedState();
-  }
+  _FeedState createState() => _FeedState();
 }
 
 class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return Column(
-          children: <Widget>[
-            _buildItem(),
-            Divider(
-              thickness: 2,
-              color: AppColors.mercury,
-            ),
-          ],
-        );
-      }),
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
+        title: Text(
+          'Photo',
+          style: AppStyles.h1Black.copyWith(
+            color: AppColors.black,
+          ),
+        ),
+        backgroundColor: AppColors.white,
+      ),
+      body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              children: <Widget>[
+                _buildItem(),
+                Divider(
+                  thickness: 2,
+                  color: AppColors.mercury,
+                ),
+              ],
+            );
+          }),
     );
   }
 
   Widget _buildItem() {
     return Column(
-      children: [
-        Photo('https://thispersondoesnotexist.com/image?1'),
-        _buildPhotoMeta()
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Photo(photoLink: kFlutterDash),
+        _buildPhotoMeta(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Text(
+            'This is text about picture',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyles.h3.copyWith(color: AppColors.black),
+          ),
+        )
       ],
     );
   }
@@ -43,24 +69,24 @@ class _FeedState extends State<Feed> {
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           Row(
             children: [
-              UserAvatar('https://thispersondoesnotexist.com/image?2'),
+              UserAvatar('https://skill-branch.ru/img/speakers/Adechenko.jpg'),
               SizedBox(width: 6),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Kir', style: AppStyles.h2Black),
-                  Text('@Kir',
+                children: <Widget>[
+                  Text("Kirill Adechenko", style: AppStyles.h2Black),
+                  Text("@kaparray",
                       style:
                           AppStyles.h5Black.copyWith(color: AppColors.manatee)),
                 ],
-              )
+              ),
             ],
           ),
-          LikeButton(10, true)
+          LikeButton(10, true),
         ],
       ),
     );
